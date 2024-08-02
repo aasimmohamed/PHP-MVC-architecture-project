@@ -7,7 +7,7 @@ $db = App::resolve(Database::class);
 
 $currentUserId = 7;
 
-$note = $db->query('SELECT * FROM notes WHERE id = :id', [
+$note = $db->query('select * from notes where id = :id', [
     'id' => $_GET['id']
 ])->findOrFail();
 

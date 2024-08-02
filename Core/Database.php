@@ -1,11 +1,11 @@
 <?php
 
 namespace Core;
+
 use PDO;
 
 class Database
 {
-
     public $connection;
     public $statement;
 
@@ -21,6 +21,7 @@ class Database
     public function query($query, $params = [])
     {
         $this->statement = $this->connection->prepare($query);
+
         $this->statement->execute($params);
 
         return $this;
@@ -40,11 +41,10 @@ class Database
     {
         $result = $this->find();
 
-        if(!$result) {
+        if (!$result) {
             abort();
         }
 
         return $result;
     }
 }
-

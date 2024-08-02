@@ -33,10 +33,11 @@ class Session
     {
         $_SESSION = [];
     }
-    
+
     public static function destroy()
     {
         static::flush();
+
         session_destroy();
 
         $params = session_get_cookie_params();

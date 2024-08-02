@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use Core\Middleware\Auth;
+use Core\Middleware\Authenticated;
 use Core\Middleware\Guest;
 use Core\Middleware\Middleware;
 
@@ -50,6 +50,7 @@ class Router
     public function only($key)
     {
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;
+
         return $this;
     }
 
@@ -66,10 +67,17 @@ class Router
         $this->abort();
     }
 
+    public function previousUrl()
+    {
+        return $_SERVER['HTTP_REFERER'];
+    }
+
     protected function abort($code = 404)
     {
         http_response_code($code);
+
         require base_path("views/{$code}.php");
+
         die();
     }
 }
